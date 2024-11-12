@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Merchant;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Merchant;
 use Illuminate\Support\Facades\Auth;
 
-class MerchantProfileController extends Controller
+class ProfileController extends Controller
 {
     public function edit()
     {
