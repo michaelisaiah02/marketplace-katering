@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        \App\Models\Menu::class => \App\Policies\MenuPolicy::class,
+    ];
+
     /**
      * Register any application services.
      */

@@ -1,10 +1,10 @@
 @extends('layouts.auth')
 
-@section('title', 'Register as Merchant')
+@section('title', 'Register as Customer')
 
 @section('content')
-    <h2 class="text-center mb-4">Register</h2>
-    <form action="{{ route('merchant.register') }}" method="POST">
+    <h2 class="text-center mb-4">Customer Register</h2>
+    <form action="{{ route('customer.register') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>

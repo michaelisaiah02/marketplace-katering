@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Merchant\Auth;
+namespace App\Http\Controllers\Customer\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
-class AuthenticatedSessionMerchantController extends Controller
+class AuthenticatedSessionCustomerController extends Controller
 {
     public function create()
     {
-        return view('merchant.auth.login');
+        return view('customer.auth.login');
     }
 
     public function store(Request $request)
@@ -19,10 +20,12 @@ class AuthenticatedSessionMerchantController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        if (Auth::guard('merchant')->attempt($request->only('email', 'password'))) {
-            return redirect()->intended('/merchant/dashboard')->with('success', 'Login berhasil.');
+        if (Auth::guard('customer')->attempt($request->only('email', 'password'))) {
+            return redirect()->intended('/customer/dashboard')->with('success', 'Login berhasil.');
         }
+        // dd($request->all());
+
+        $request->session()->regenerate();
 
         return back()->withErrors([
             'email' => 'Email tidak cocok.',
@@ -31,9 +34,11 @@ class AuthenticatedSessionMerchantController extends Controller
 
     public function destroy(Request $request)
     {
-        Auth::guard('merchant')->logout();
+        Auth::guard('customer')->logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('merchant.login');
+
+        return redirect()->route('customer.login'); // Redirect ke login page
     }
 }
