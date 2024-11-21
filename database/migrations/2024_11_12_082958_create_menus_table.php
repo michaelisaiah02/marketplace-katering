@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('merchant_id'); // Relasi ke merchant
-            $table->string('name'); // Nama menu
-            $table->text('description'); // Deskripsi menu
-            $table->string('photo'); // Foto menu
-            $table->decimal('price', 10, 2); // Harga menu
+            $table->string('name');
+            $table->text('description');
+            $table->decimal('price', 10, 2);
+            $table->string('image_path')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Merchant sebagai pemilik menu
             $table->timestamps();
-
-            // Foreign key untuk relasi ke merchant
-            $table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade');
         });
     }
 

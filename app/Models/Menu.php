@@ -10,16 +10,21 @@ class Menu extends Model
     use HasFactory;
 
     protected $fillable = [
-        'merchant_id',
         'name',
         'description',
-        'photo',
         'price',
+        'merchant_id',
     ];
 
-    // Relasi ke model Merchant
+    // Relasi dengan User sebagai merchant
     public function merchant()
     {
-        return $this->belongsTo(Merchant::class);
+        return $this->belongsTo(User::class, 'merchant_id')->where('role', 'merchant');
+    }
+
+    // Relasi dengan order (opsional, jika diperlukan)
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

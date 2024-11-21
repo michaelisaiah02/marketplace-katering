@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Merchant;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MerchantController extends Controller
 {
-    public function show(Merchant $merchant)
+    public function index()
     {
-        return view('customer.merchants.show', compact('merchant'));
+        $user = auth()->user();
+
+        // Statistik pesanan
+        $newOrdersCount = $user->orders()->where('status', 'new')->count();
+        $completedOrdersCount = $user->orders()->where('status', 'completed')->count();
+
+        // Total pendapatan
+        $totalRevenue = $user->orders()->where('status', 'completed')->sum('total_price');
+
+        return view('merchant.dashboard', [
+            'newOrdersCount' => $newOrdersCount,
+            'completedOrdersCount' => $completedOrdersCount,
+            'totalRevenue' => $totalRevenue,
+        ]);
     }
 }

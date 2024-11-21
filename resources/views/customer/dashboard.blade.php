@@ -1,4 +1,6 @@
-@extends('layouts.customer')
+@extends('layouts.user')
+
+@section('title', 'Dashboard')
 
 @section('content')
     <div class="container">
@@ -28,7 +30,7 @@
             </div>
         </form>
 
-        @if ($merchants->count())
+        {{-- @if ($merchants->count())
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -57,6 +59,6 @@
             </div>
         @else
             <p class="text-center">Tidak ada katering yang ditemukan.</p>
-        @endif
+        @endif --}}
     </div>
 @endsection

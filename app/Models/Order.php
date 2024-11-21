@@ -11,20 +11,26 @@ class Order extends Model
 
     protected $fillable = [
         'customer_id',
-        'menu_id',
-        'quantity',
-        'delivery_date',
-        'total_price',
+        'merchant_id',
         'status',
+        'total_price',
     ];
 
+    // Relasi ke Customer
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
-    public function menu()
+    // Relasi ke Merchant
+    public function merchant()
     {
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(User::class, 'merchant_id');
+    }
+
+    // Relasi ke OrderItem
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

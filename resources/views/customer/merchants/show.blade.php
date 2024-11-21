@@ -1,4 +1,6 @@
-@extends('layouts.customer')
+@extends('layouts.user')
+
+@section('title', 'Detail Katering')
 
 @section('content')
     <div class="container">

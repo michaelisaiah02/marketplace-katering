@@ -1,4 +1,6 @@
-@extends('layouts.customer')
+@extends('layouts.user')
+
+@section('title', 'Pesan Menu')
 
 @section('content')
     <div class="container">
@@ -9,8 +11,8 @@
 
             <div class="mb-3">
                 <label for="quantity" class="form-label">Jumlah Porsi</label>
-                <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1"
-                    required>
+                <input type="number" name="quantity" id="quantity" class="form-control" min="1"
+                    value="{{ old('quantity') }}" required>
                 @error('quantity')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror

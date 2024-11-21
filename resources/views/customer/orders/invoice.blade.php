@@ -1,4 +1,6 @@
-@extends('layouts.merchant')
+@extends('layouts.user')
+
+@section('title', 'Invoice')
 
 @section('content')
     <div class="container">
