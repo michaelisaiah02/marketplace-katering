@@ -3,8 +3,8 @@
 @section('title', 'Invoice')
 
 @section('content')
-    <div class="container mt-4">
-        <h1 class="text-light">Invoice</h1>
+    <div class="container mt-4 text-light">
+        <h1>Invoice</h1>
         <p><strong>ID Pesanan:</strong> {{ $order->id }}</p>
         <p><strong>Pelanggan:</strong> {{ $order->customer->name }}</p>
         <p><strong>Merchant:</strong> {{ $order->merchant->name }}</p>

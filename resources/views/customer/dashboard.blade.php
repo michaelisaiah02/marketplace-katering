@@ -3,7 +3,7 @@
 @section('title', 'Dashboard Customer')
 
 @section('content')
-    <h1 class="text-light">Dashboard Customer</h1>
+    <h1>Dashboard Customer</h1>
 
     <div class="row my-4">
         <div class="col-lg-6 mb-3">
@@ -16,12 +16,12 @@
 
     <!-- Hasil Pencarian -->
     @if ($query)
-        <h2 class="text-light">Hasil Pencarian untuk "{{ $query }}"</h2>
+        <h2>Hasil Pencarian untuk "{{ $query }}"</h2>
         @if ($menus->isEmpty())
-            <p class="text-light">Tidak ada menu ditemukan.</p>
+            <p>Tidak ada menu ditemukan.</p>
         @endif
     @else
-        <h2 class="text-light">Daftar Menu</h2>
+        <h2>Daftar Menu</h2>
     @endif
 
     <!-- List Menu -->

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mt-4">
-        <h1 class="text-light">Daftar Pesanan</h1>
+        <h1>Daftar Pesanan</h1>
 
         @if ($orders->isEmpty())
             @if (auth()->user()->isCustomer())

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-4 text-light">Dashboard Merchant</h1>
+        <h1 class="my-4">Dashboard Merchant</h1>
 
         <div class="row mb-4">
             <div class="col-md-4 mb-3">

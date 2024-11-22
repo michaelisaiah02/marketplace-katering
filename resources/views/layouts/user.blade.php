@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
-<body style="background: url('{{ asset('images/background.jpg') }}')">
+<body class="text-light" style="background: url('{{ asset('images/background.jpg') }}'); background-size: cover;">
     <!-- Navbar atau Sidebar (opsional) -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
         <div class="container">

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container my-4">
-        <h2 class="text-light">Keranjang Pesanan</h2>
+        <h2>Keranjang Pesanan</h2>
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -12,7 +12,7 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
         @if ($carts->isEmpty())
-            <p class="text-light">Keranjang kosong.</p>
+            <p>Keranjang kosong.</p>
         @else
             <form action="{{ route('customer.orders.store') }}" method="POST">
                 @csrf
