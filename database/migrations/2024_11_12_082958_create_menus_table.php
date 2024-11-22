@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price', 10, 2);
+            $table->integer('price', false, true);
             $table->string('image_path')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Merchant sebagai pemilik menu
             $table->timestamps();
