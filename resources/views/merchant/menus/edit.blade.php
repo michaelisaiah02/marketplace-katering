@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-4">Edit Menu</h1>
+        <h1 class="my-4 text-light">Edit Menu</h1>
 
         <form action="{{ route('merchant.menus.update', $menu->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

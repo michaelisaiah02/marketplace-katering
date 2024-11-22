@@ -22,14 +22,20 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'in:merchant,customer'], // Validasi role
+            'address' => ['required', 'string'],
+            'contact' => ['required', 'string'],
+            'role' => ['required', 'in:merchant,customer'],
+            'description' => ['nullable', 'string'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'contact' => $request->contact,
             'role' => $request->role,
+            'description' => $request->description,
         ]);
 
         Auth::login($user);

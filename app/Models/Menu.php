@@ -19,12 +19,17 @@ class Menu extends Model
     // Relasi dengan User sebagai merchant
     public function merchant()
     {
-        return $this->belongsTo(User::class, 'merchant_id')->where('role', 'merchant');
+        return $this->belongsTo(User::class, 'user_id')->where('role', 'merchant');
     }
 
     // Relasi dengan order (opsional, jika diperlukan)
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-4">Tambah Menu Baru</h1>
+        <h1 class="my-4 text-light">Tambah Menu Baru</h1>
 
         <form action="{{ route('merchant.menus.store') }}" method="POST" enctype="multipart/form-data">
             @csrf

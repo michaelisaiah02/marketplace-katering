@@ -1,44 +1,39 @@
 @extends('layouts.user')
 
-@section('title', 'Detail Katering')
+@section('title', 'Menu Merchant')
 
 @section('content')
-    <div class="container">
-        <h1>Detail Katering: {{ $merchant->name }}</h1>
+    <div class="container my-4">
+        <h2>Menu dari {{ $merchant->name }}</h2>
 
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Informasi Katering</h5>
-                <p><strong>Nama Katering:</strong> {{ $merchant->name }}</p>
-                <p><strong>Lokasi:</strong> {{ $merchant->location }}</p>
-                <p><strong>Jenis Makanan:</strong> {{ $merchant->food_type }}</p>
-                <p><strong>Deskripsi:</strong> {{ $merchant->description }}</p>
-            </div>
-        </div>
-
-        <h2 class="mt-4">Menu Katering</h2>
-        @if ($merchant->menus->count())
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Menu</th>
-                        <th>Harga</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($merchant->menus as $menu)
-                        <tr>
-                            <td>{{ $menu->name }}</td>
-                            <td>{{ $menu->price }}</td>
-                            <td><a href="{{ route('customer.orders.create', ['merchant' => $merchant->id, 'menu' => $menu->id]) }}"
-                                    class="btn btn-primary btn-sm">Pesan</a></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        @if ($menus->isEmpty())
+            <p>Merchant ini belum memiliki menu.</p>
         @else
-            <p class="text-center">Tidak ada menu yang tersedia.</p>
+            <div class="row">
+                @foreach ($menus as $menu)
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            @if ($menu->image_path)
+                                <img src="{{ asset('storage/' . $menu->image_path) }}" class="card-img-top"
+                                    alt="{{ $menu->name }}" style="height: 250px; object-fit: cover;">
+                            @else
+                                <img src="{{ asset('images/default-menu.png') }}" class="card-img-top"
+                                    alt="{{ $menu->name }}" style="height: 250px; object-fit: cover;">
+                            @endif
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ $menu->name }}</h5>
+                                <p class="card-text">Harga: {{ number_format($menu->price, 0, ',', '.') }} IDR</p>
+                                <div class="mt-auto">
+                                    <form action="{{ route('customer.cart.store', $menu->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary w-100">Tambah ke Keranjang</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         @endif
     </div>
 @endsection

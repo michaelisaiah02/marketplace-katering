@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Ubah Profil</h1>
+        <h1 class="text-light">Ubah Profil</h1>
 
         @if (session('success'))
             <div class="alert alert-success">

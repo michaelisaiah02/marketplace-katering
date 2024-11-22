@@ -1,35 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Merchant;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MerchantSearchController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Merchant::query();
+        $query = $request->input('query');
 
-        if ($request->filled('name')) {
-            $query->where('name', 'like', '%' . $request->name . '%');
-        }
+        $merchants = User::where('role', 'merchant')
+            ->when($query, function ($q) use ($query) {
+                return $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->paginate(10);
 
-        if ($request->filled('address')) {
-            $query->where('address', 'like', '%' . $request->address . '%');
-        }
+        return view('customer.merchants.search', compact('merchants', 'query'));
+    }
 
-        if ($request->filled('location')) {
-            $query->where('location', 'like', '%' . $request->location . '%');
-        }
+    public function show($id)
+    {
+        $merchant = User::where('role', 'merchant')->findOrFail($id);
+        $menus = $merchant->menus()->get();
 
-        if ($request->filled('food_type')) {
-            $query->where('food_type', 'like', '%' . $request->food_type . '%');
-        }
-
-        $merchants = $query->paginate(10); // Hasil pencarian dengan paginasi
-
-        return view('customer.merchants.search', compact('merchants'));
+        return view('customer.merchants.show', compact('merchant', 'menus'));
     }
 }

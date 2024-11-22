@@ -11,15 +11,15 @@ class MerchantController extends Controller
         $user = auth()->user();
 
         // Statistik pesanan
-        $newOrdersCount = $user->orders()->where('status', 'new')->count();
-        $completedOrdersCount = $user->orders()->where('status', 'completed')->count();
+        $newOrders = $user->orders()->where('status', 'new')->count();
+        $completedOrders = $user->orders()->where('status', 'completed')->count();
 
         // Total pendapatan
         $totalRevenue = $user->orders()->where('status', 'completed')->sum('total_price');
 
         return view('merchant.dashboard', [
-            'newOrdersCount' => $newOrdersCount,
-            'completedOrdersCount' => $completedOrdersCount,
+            'newOrders' => $newOrders,
+            'completedOrders' => $completedOrders,
             'totalRevenue' => $totalRevenue,
         ]);
     }

@@ -35,16 +35,53 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="mb-3">
+            <label for="address" class="form-label">Alamat</label>
+            <textarea id="address" name="address" class="form-control" required></textarea>
+        </div>
+        @error('address')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <div class="mb-3">
+            <label for="contact" class="form-label">Nomor Telepon</label>
+            <input type="text" id="contact" name="contact" class="form-control" required>
+        </div>
+        @error('contact')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <div class="mb-3">
             <label for="role" class="form-label">Daftar Sebagai</label>
             <select id="role" name="role" class="form-select" required>
                 <option value="customer">Customer</option>
                 <option value="merchant">Merchant</option>
             </select>
         </div>
+        <div class="mb-3" id="form-description">
+            <label for="description">Deskripsi Katering</label>
+            <textarea id="description" name="description" class="form-control"></textarea>
+        </div>
+        @error('description')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <button type="submit" class="btn btn-primary w-100">Daftar</button>
     </form>
     <div class="text-center mt-3">
         <p class="mb-0">Sudah punya akun? <a href="{{ route('login') }}" class="text-decoration-none">Login di sini</a>
         </p>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#form-description').hide();
+            $('#role').change(function() {
+                if ($(this).val() === 'customer') {
+                    $('#form-description').hide();
+                    $('#description').removeAttr('required');
+                } else {
+                    $('#form-description').show();
+                    $('#description').attr('required', 'required');
+                }
+            });
+        });
+    </script>
 @endsection

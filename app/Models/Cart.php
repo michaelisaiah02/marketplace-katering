@@ -2,25 +2,26 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Menu;
 
 class Cart extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'customer_id',
+        'user_id',
         'menu_id',
         'quantity',
     ];
 
-    // Relasi ke Customer
-    public function customer()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'customer_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Relasi ke Menu
     public function menu()
     {
         return $this->belongsTo(Menu::class, 'menu_id');

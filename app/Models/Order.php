@@ -14,23 +14,42 @@ class Order extends Model
         'merchant_id',
         'status',
         'total_price',
+        'delivery_date',
     ];
 
-    // Relasi ke Customer
+    // Relasi dengan User sebagai customer
     public function customer()
     {
         return $this->belongsTo(User::class, 'customer_id');
     }
 
-    // Relasi ke Merchant
+    // Relasi dengan User sebagai merchant
     public function merchant()
     {
         return $this->belongsTo(User::class, 'merchant_id');
     }
 
-    // Relasi ke OrderItem
+    // Relasi dengan OrderItem
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function getStatusLabel()
+    {
+        switch ($this->status) {
+            case 'pending':
+                return 'Menunggu Konfirmasi';
+            case 'confirmed':
+                return 'Dikonfirmasi';
+            case 'in_progress':
+                return 'Sedang Diproses';
+            case 'completed':
+                return 'Selesai';
+            case 'cancelled':
+                return 'Dibatalkan';
+            default:
+                return 'Tidak Diketahui';
+        }
     }
 }
